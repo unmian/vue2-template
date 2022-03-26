@@ -6,7 +6,11 @@ commit_msg=`cat $1`
 
 # 获取用户 email
 email=`git config user.email`
-msg_re="^(build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test)\(all|dto|core|service|dao|sql|api|component|config|constant|data|directive|filter|lib|router|store|util|view)(|(dto|core|service|dao|sql|api|component|config|constant|data|directive|filter|lib|router|store|util|view))*\):\s.{1,100}"
+msg_type="build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test"
+msg_scope="dto|core|service|dao|sql|api|component|config|constant|data|directive|filter|lib|router|store|util|view"
+msg_re="^($msg_type)\((all|other|$msg_scope)(\|($msg_scope))*\):\s.{1,100}"
+
+echo "$msg_re"
 
 if [[ $commit_msg =~ $msg_re ]]; then
 	exit 0
