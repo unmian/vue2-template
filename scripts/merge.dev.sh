@@ -3,7 +3,5 @@
 
 name=`git config user.name`
 
-git checkout dev
-git pull
 git checkout -b "dev-$name"
-git merge dev
+git merge origin/dev
