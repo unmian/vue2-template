@@ -12,7 +12,7 @@
     "tag:patch": "vue-tsc --skipLibCheck --noEmit && yarn version --patch",
     "tag:minor": "vue-tsc --skipLibCheck --noEmit && yarn version --minor",
     "tag:major": "vue-tsc --skipLibCheck --noEmit && yarn version --major",
-    "merge:dev": "git merge dev",
+    "merge:dev": "bash ./scripts/merge.dev.sh",
     "rebase:stage": "git rebase stage dev",
     "rebase:release": "git rebase release stage"
   },
