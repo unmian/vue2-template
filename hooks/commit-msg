@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# encoding: utf-8.0
+
+# 获取当前提交的 commit msg
+commit_msg=`cat $1`
+
+# 获取用户 email
+email=`git config user.email`
+msg_re="^(build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test)\(all|dto|core|service|dao|sql|api|component|config|constant|data|directive|filter|lib|router|store|util|view)(|(dto|core|service|dao|sql|api|component|config|constant|data|directive|filter|lib|router|store|util|view))*\):\s.{1,100}"
+
+if [[ $commit_msg =~ $msg_re ]]; then
+	exit 0
+else
+  echo "不合法的 commit 消息提交格式，请使用正确的格式："
+	echo "> feat(router|view): 新增了系统配置界面"
+	echo "> fix(view): 修复了无法登录的问题"
+  echo "详情请查看 git commit 提交规范：https://lescity.yuque.com/cfud8v/iw3m4h/yvp6rm"
+  
+  # 异常退出
+  exit 1
+fi

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# encoding: utf-8.0
+
+yarn run test
+
+# 获取上面脚本的退出码
+exitCode="$?"
+exit $exitCode

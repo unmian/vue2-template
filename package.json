@@ -1,0 +1,47 @@
+{
+  "name": "vue2-template",
+  "version": "0.0.0",
+  "scripts": {
+    "init": "bash ./scripts/init.sh",
+    "dev": "vite --config ./config/base.config.ts",
+    "preview": "vite preview",
+    "test": "vue-tsc --skipLibCheck --noEmit",
+    "build": "vue-tsc --skipLibCheck --noEmit && vite build --config ./config/build.config.ts",
+    "package": "bash ./scripts/package.sh",
+    "update:deps": "bash ./scripts/update.lib.sh",
+    "tag:patch": "vue-tsc --skipLibCheck --noEmit && yarn version --patch",
+    "tag:minor": "vue-tsc --skipLibCheck --noEmit && yarn version --minor",
+    "tag:major": "vue-tsc --skipLibCheck --noEmit && yarn version --major",
+    "merge:dev": "git merge dev",
+    "rebase:stage": "git rebase stage dev",
+    "rebase:release": "git rebase release stage"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23",
+    "@vue/compiler-sfc": "^3.2.31",
+    "@vue/runtime-dom": "^3.2.31",
+    "autoprefixer": "^10.4.4",
+    "postcss": "^8.4.12",
+    "sass": "^1.49.9",
+    "typescript": "^4.6.3",
+    "vite": "^2.8.6",
+    "vite-plugin-dts": "^1.0.3",
+    "vite-plugin-vue2": "^1.9.3",
+    "vue-template-compiler": "^2.6.14",
+    "vue-tsc": "^0.33.9"
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "mockjs": "^1.1.0",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.3",
+    "vuex": "^3.6.2"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "ie >= 10",
+    "iOS >= 8",
+    "Android >= 4"
+  ]
+}
