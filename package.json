@@ -2,19 +2,19 @@
   "name": "vue2-template",
   "version": "0.0.0",
   "scripts": {
-    "init": "bash ./scripts/init.sh",
+    "init": "node ./scripts/init",
     "dev": "vite --config ./config/base.config.ts",
     "preview": "vite preview",
     "test": "vue-tsc --skipLibCheck --noEmit",
     "build": "vue-tsc --skipLibCheck --noEmit && vite build --config ./config/build.config.ts",
-    "package": "bash ./scripts/package.sh",
-    "update:deps": "bash ./scripts/update.lib.sh",
+    "package": "node ./scripts/package",
+    "update:deps": "node ./scripts/update.deps",
     "tag:patch": "vue-tsc --skipLibCheck --noEmit && yarn version --patch",
     "tag:minor": "vue-tsc --skipLibCheck --noEmit && yarn version --minor",
     "tag:major": "vue-tsc --skipLibCheck --noEmit && yarn version --major",
-    "merge:dev": "bash ./scripts/merge.dev.sh",
-    "rebase:stage": "git rebase stage dev",
-    "rebase:release": "git rebase release stage"
+    "merge:dev": "node ./scripts/merge.dev",
+    "release:stage": "node ./scripts/release.stage",
+    "release:release": "node ./scripts/release.release"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
