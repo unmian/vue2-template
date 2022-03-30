@@ -9,12 +9,10 @@
     "build": "vue-tsc --skipLibCheck --noEmit && vite build --config ./config/build.config.ts",
     "package": "node ./scripts/package",
     "update:deps": "node ./scripts/update.deps",
-    "tag:patch": "vue-tsc --skipLibCheck --noEmit && yarn version --patch",
-    "tag:minor": "vue-tsc --skipLibCheck --noEmit && yarn version --minor",
-    "tag:major": "vue-tsc --skipLibCheck --noEmit && yarn version --major",
-    "merge:dev": "node ./scripts/merge.dev",
     "release:stage": "node ./scripts/release.stage",
-    "release:release": "node ./scripts/release.release"
+    "release:patch": "node ./scripts/release.release patch",
+    "release:minor": "node ./scripts/release.release minor",
+    "release:major": "node ./scripts/release.release major"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
@@ -34,6 +32,8 @@
     "axios": "^0.26.1",
     "mockjs": "^1.1.0",
     "vue": "^2.6.14",
+    "vue-class-component": "^7.2.6",
+    "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.5.3",
     "vuex": "^3.6.2"
   },

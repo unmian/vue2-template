@@ -92,7 +92,10 @@
       "views/*": [
         "./src/views/*"
       ]
-    }
+    },
+    "types": [
+      "vite/client"
+    ]
   },
   "vueCompilerOptions": {
     "experimentalCompatMode": 2
