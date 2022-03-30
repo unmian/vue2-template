@@ -1,7 +1,7 @@
 <!--
  * @Author: Quarter
  * @Date: 2022-03-16 03:34:42
- * @LastEditTime: 2022-03-26 11:56:18
+ * @LastEditTime: 2022-03-30 02:59:09
  * @LastEditors: Quarter
  * @Description: 主应用入口
  * @FilePath: /vue2-template/src/App.vue
@@ -11,11 +11,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/runtime-dom";
+import { Vue, Component } from "vue-property-decorator";
 
-export default defineComponent({
+@Component({
   name: "Application",
-});
+})
+export default class Application extends Vue { }
 </script>
 
 <style lang="scss">

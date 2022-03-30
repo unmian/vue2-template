@@ -14,6 +14,5 @@ import store from "store";
 new Vue({
   router,
   store,
-  // @ts-ignore
   render: h => h(App),
 }).$mount("#app");
