@@ -1,8 +1,3 @@
-<!--
- * @Author: Quarter
- * @Date: 2022-03-26 04:02:15
- * @LastEditTime: 2022-03-26 04:02:16
- * @LastEditors: Quarter
- * @Description: 
- * @FilePath: /vue2-template/README.md
--->
+# vue2-template
+
+使用 Vite 工具的 Vue 2.x 项目模版

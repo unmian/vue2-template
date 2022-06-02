@@ -1,0 +1,132 @@
+kind: pipeline
+type: docker
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: init
+    image: alpine
+    environment:
+      PROJECT_NAME:
+        from_secret: PROJECT_NAME
+      OSS_ENABLE:
+        from_secret: OSS_ENABLE
+      PROJECT_OSS:
+        from_secret: PROJECT_OSS
+      OSS_KEY:
+        from_secret: OSS_KEY
+      OSS_SECRET:
+        from_secret: OSS_SECRET
+      DEPLOY_KEY:
+        from_secret: DEPLOY_KEY
+      DEPLOY_SECRET:
+        from_secret: DEPLOY_SECRET
+      DINGTALK:
+        from_secret: DINGTALK
+    commands:
+      - apk add bash
+      - bash scripts/init.sh
+
+  - name: test
+    image: node:16
+    commands:
+      - yarn install
+      - yarn run lint
+      - yarn run test
+    when:
+      branch:
+        - dev
+
+  - name: build:stage
+    image: node:16
+    commands:
+      - yarn install
+      - yarn run build:stage
+    when:
+      branch:
+        - stage
+
+  - name: build:release
+    image: node:16
+    commands:
+      - yarn install
+      - yarn run build:release
+    when:
+      branch:
+        - release
+
+  - name: publish:stage
+    image: alpine
+    environment:
+      PROJECT_NAME:
+        from_secret: PROJECT_NAME
+      OSS_ENABLE:
+        from_secret: OSS_ENABLE
+      PROJECT_OSS:
+        from_secret: PROJECT_OSS
+      OSS_KEY:
+        from_secret: OSS_KEY
+      OSS_SECRET:
+        from_secret: OSS_SECRET
+      DEPLOY_KEY:
+        from_secret: DEPLOY_KEY
+      DEPLOY_SECRET:
+        from_secret: DEPLOY_SECRET
+    commands:
+      - apk add bash
+      - apk add zip
+      - apk add wget
+      - wget https://dl.min.io/client/mc/release/linux-amd64/mc -P /usr/bin
+      - chmod +x /usr/bin/mc
+      - bash scripts/package.sh stage
+    when:
+      branch:
+        - stage
+
+  - name: publish:release
+    image: alpine
+    environment:
+      PROJECT_NAME:
+        from_secret: PROJECT_NAME
+      OSS_ENABLE:
+        from_secret: OSS_ENABLE
+      PROJECT_OSS:
+        from_secret: PROJECT_OSS
+      OSS_KEY:
+        from_secret: OSS_KEY
+      OSS_SECRET:
+        from_secret: OSS_SECRET
+      DEPLOY_KEY:
+        from_secret: DEPLOY_KEY
+      DEPLOY_SECRET:
+        from_secret: DEPLOY_SECRET
+    commands:
+      - apk add bash
+      - apk add zip
+      - apk add wget
+      - wget https://dl.min.io/client/mc/release/linux-amd64/mc -P /usr/bin
+      - chmod +x /usr/bin/mc
+      - bash scripts/package.sh release
+    when:
+      branch:
+        - release
+
+  - name: notify
+    image: lddsb/drone-dingtalk-message
+    settings:
+      token:
+        from_secret: DINGTALK
+      type: markdown
+    when:
+      branch:
+        - stage
+        - release
+
+trigger:
+  branch:
+    - dev
+    - stage
+    - release

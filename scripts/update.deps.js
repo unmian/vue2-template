@@ -21,7 +21,7 @@ try {
 }
 // 升级其它依赖
 try {
-  const result = execSync(`ncu -u -x "vue vuex vue-router socket.io-client" -t latest`, {
+  const result = execSync(`ncu -u -x "vue vuex vue-router socket.io-client @types/socket.io-client" -t latest`, {
     cwd: workDir,
     encoding: "utf8",
   });
